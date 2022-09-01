@@ -1,7 +1,7 @@
 import { ThirdwebAuth } from "@thirdweb-dev/auth/next";
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
+export const supabase = createClient(
   process.env.SUPABASE_URL || "", 
   process.env.SUPABASE_SERVICE_ROLE || ""
 );
