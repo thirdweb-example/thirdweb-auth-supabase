@@ -1,14 +1,10 @@
 {
   "version": "v1",
   "packages": {
-    "@thirdweb-dev/react": {
-      "signature": "41acca38081c9450b254c0fd717767da",
-      "file": true,
-      "replaced": "^2"
-    },
     "@thirdweb-dev/auth": {
-      "signature": "01e8d340928da8f773adb2abea527bb2",
-      "file": true
+      "signature": "0c90d3ff9d6d63c55a02787b7272e3a4",
+      "file": true,
+      "replaced": "^1.0.0"
     }
   }
 }
