@@ -1,7 +1,9 @@
 ## Getting Started
 
 
-This example demonstrates how to use thirdweb Auth with NextJS.
+This example demonstrates how to use thirdweb Auth with Supabase.
+
+Before running the project, you'll need to seutp and configure Supabase [as specified here](https://portal.thirdweb.com/auth/integrations/supabase).
 
 To run the project, first clone this repository, and then run one of the following commands to install the dependencies:
 
