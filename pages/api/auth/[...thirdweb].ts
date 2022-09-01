@@ -13,27 +13,31 @@ export const { ThirdwebAuthHandler, getUser } = ThirdwebAuth({
     login: async (address: string) => {
       const { data: user } = 
         await supabase
-          .from("user")
+          .from("users")
           .select("*")
-          .eq("address", address)
-          .single();
+          .eq("address", address.toLowerCase())
+          .single()
 
       if (!user) {
-        await supabase
+        const res = await supabase
           .from('users')
-          .insert({ address })
+          .insert({ address: address.toLowerCase() })
           .single();
+        
+        if (res.error) {
+          throw new Error("Failed to create user!")
+        }
       }
     },
     user: async (address: string) => {
       const { data: user } = 
         await supabase
-          .from("user")
+          .from("users")
           .select("*")
-          .eq("address", address)
-          .single();
+          .eq("address", address.toLowerCase())
+          .single()
 
-      return { ...user };
+      return user;
     },
   }
 });
