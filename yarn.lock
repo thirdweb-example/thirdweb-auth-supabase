@@ -1058,10 +1058,10 @@
     "@types/use-sync-external-store" "^0.0.3"
     use-sync-external-store "^1.2.0"
 
-"@thirdweb-dev/auth@1.0.2-nightly-74640b2":
-  version "1.0.2-nightly-74640b2"
-  resolved "https://registry.yarnpkg.com/@thirdweb-dev/auth/-/auth-1.0.2-nightly-74640b2.tgz#2ad00deabf2191f078bc89e2a921a914ee14bc50"
-  integrity sha512-gICbdJ7n9bD0BbAl2jAY5Tch3/vXORk1ulJAsMPq7CEeyVnc/BmJzY/WlYFsRmM5HsDqdt58FxQBzSstRJ1KWA==
+"@thirdweb-dev/auth@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@thirdweb-dev/auth/-/auth-1.0.7.tgz#9c75e299678ba4d27b5b565fa272c7f71d34972b"
+  integrity sha512-kAbvRrXmXbsER6xvhyDDQeOgLNFFu8D5ZA9sJoeQlB3BmBIe2GBvpiFYqJH+y/fZ+ucAnMehku78cZQ1PYicDw==
   dependencies:
     cookie "^0.5.0"
     cookie-parser "^1.4.6"

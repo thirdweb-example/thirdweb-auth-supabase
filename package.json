@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.6",
-    "@thirdweb-dev/auth": "1.0.2-nightly-74640b2",
+    "@thirdweb-dev/auth": "^1.0.7",
     "@thirdweb-dev/react": "^2.8.0",
     "@thirdweb-dev/sdk": "^2",
     "ethers": "^5.6.8",
