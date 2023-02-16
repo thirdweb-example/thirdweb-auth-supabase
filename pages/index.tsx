@@ -35,7 +35,7 @@ const Home: NextPage = () => {
           />
           <img
             className={styles.icon}
-            src={"/firebase.png"}
+            src={"/supabase.png"}
             alt="firebase icon"
           />
         </div>
