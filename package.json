@@ -1,5 +1,5 @@
 {
-  "name": "next-typescript-starter",
+  "name": "thirdweb-auth-supabase",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,16 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.6",
-    "@thirdweb-dev/auth": "^1.0.7",
-    "@thirdweb-dev/react": "^2.8.0",
-    "@thirdweb-dev/sdk": "^2",
+    "@supabase/supabase-js": "^2.7.1",
+    "@thirdweb-dev/auth": "3.0.4-dev-3d88012",
+    "@thirdweb-dev/react": "^3.9.0-nightly-017b0d5",
+    "@thirdweb-dev/sdk": "^3.8.2",
     "ethers": "^5.6.8",
+    "jsonwebtoken": "^9.0.0",
     "next": "^12.1.6",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^17.0.35",
     "@types/react": "^17.0.45",
     "eslint": "^8.16.0",
