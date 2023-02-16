@@ -1,6 +1,5 @@
 ## Getting Started
 
-
 This example demonstrates how to use thirdweb Auth with Supabase.
 
 Before running the project, you'll need to seutp and configure Supabase [as specified here](https://portal.thirdweb.com/auth/integrations/supabase).
@@ -13,13 +12,20 @@ npm install
 yarn install
 ```
 
-Next, you need to create a `.env.local` file and add the `ADMIN_PRIVATE_KEY` variable to it with the private key of the wallet you want to use as the admin wallet to generate and verify payloads. Your file should use something like the following:
+Next, you need to create a `.env.local` file and add the following environment variables:
 
-```.env
-ADMIN_PRIVATE_KEY=...
+```
+NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE=
 ```
 
-Finally, you can run the project with one of the following commands:
+The `NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN` is used to prevent phishing attacks on the thirdweb Auth (sign-in with ethereum) request. You can learn more about it in the [Auth documentation](https://portal.thirdweb.com/auth/how-auth-works/sign-in-with-wallet#domain).
+
+The remaining environment variables are used to connect to your Supabase instance, and can be found in the settings section of your Supabase dashboard.
+
+Once you've configured the necessary environment variables, you can run this project with the following command:
 
 ```bash
 npm run dev
@@ -28,6 +34,7 @@ yarn dev
 ```
 
 Now, you can navigate to [http://localhost:3000](http://localhost:3000) to visit the client side page where you can connect a wallet, sign-in with ethereum and view the payload, and use the payload to authenticate with the backend.
+
 ## Learn More
 
 To learn more about thirdweb, take a look at the following resources:
