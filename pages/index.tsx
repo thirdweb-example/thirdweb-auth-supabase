@@ -1,61 +1,19 @@
-import { useAddress, useMetamask, useAuth } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
-import React from "react";
-import { useRouter } from "next/router";
-import { createClient } from "@supabase/supabase-js";
-
-// Create our Supabase client using anon key
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string
-);
+import { useAddress, useMetamask, useAuth } from "@thirdweb-dev/react";
+import { createSupabaseClient } from "../lib/createSupabase";
+import useSupabaseUser from "../lib/useSupabaseUser";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const router = useRouter();
-  const auth = useAuth();
+  const thirdwebAuth = useAuth();
   const address = useAddress();
   const connect = useMetamask();
-  const [user, setUser] = React.useState<any>();
-
-  // Fetch the latest user data when we refresh the page
-  React.useEffect(() => {
-    async function getUser() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (user) {
-        setUser({
-          id: user.id,
-          email: user.email,
-          address: user.user_metadata.address || "N/A",
-        });
-      }
-    }
-
-    getUser();
-  }, []);
-
-  // Sign in with google using Supabase auth
-  async function signIn() {
-    supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-  }
-
-  // Sign out using Supabase auth
-  async function signOut() {
-    await supabase.auth.signOut();
-    router.reload();
-  }
+  const { auth } = createSupabaseClient();
+  const { user, session, refresh, isLoading } = useSupabaseUser();
 
   // Link verified wallet address to our Supabase account
   async function linkWallet() {
-    const payload = await auth?.login();
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
+    const payload = await thirdwebAuth?.login();
     await fetch("/api/link", {
       method: "POST",
       headers: {
@@ -63,30 +21,95 @@ const Home: NextPage = () => {
       },
       body: JSON.stringify({ payload, access_token: session?.access_token }),
     });
-
-    router.reload();
+    refresh();
   }
 
   return (
-    <div>
-      {user ? (
+    <div className={styles.container}>
+      <div>
+        <div className={styles.iconContainer}>
+          <img
+            className={styles.icon}
+            src={"/thirdweb.png"}
+            alt="thirdweb icon"
+          />
+          <img
+            className={styles.icon}
+            src={"/firebase.png"}
+            alt="firebase icon"
+          />
+        </div>
+
+        <h1 className={styles.h1}>thirdweb + Supabase</h1>
+
+        <p className={styles.explain}>
+          In this flow, you'll be able to login to Supabase Auth with your
+          email, and then verifiably link you're wallet address to the created
+          account.
+        </p>
+
         <div>
-          {address ? (
-            <button onClick={() => linkWallet()}>Link Wallet to Account</button>
+          {user ? (
+            <div className={styles.stack}>
+              {address ? (
+                <button
+                  onClick={() => linkWallet()}
+                  className={styles.mainButton}
+                >
+                  Link Wallet to Account
+                </button>
+              ) : (
+                <button onClick={() => connect()} className={styles.mainButton}>
+                  Connect Wallet
+                </button>
+              )}
+
+              <button
+                onClick={() => auth.signOut()}
+                className={styles.mainButton}
+              >
+                Logout
+              </button>
+            </div>
           ) : (
-            <button onClick={() => connect()}>Connect Wallet</button>
+            <div>
+              <button
+                onClick={() =>
+                  auth.signInWithOAuth({
+                    provider: "google",
+                  })
+                }
+                className={styles.mainButton}
+              >
+                Login with Google
+              </button>
+            </div>
           )}
 
-          <button onClick={signOut}>Logout</button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={signIn}>Login with Google</button>
-        </div>
-      )}
+          <hr className={styles.divider} />
 
-      <div>
-        <pre>User: {JSON.stringify(user || "N/A", undefined, 2)}</pre>
+          <h2>Current User Information</h2>
+
+          <p>
+            <b>Connected Wallet: </b>
+            {address}
+          </p>
+
+          <p>
+            <b>User ID: </b>
+            {isLoading ? "Loading..." : user?.id || "N/A"}
+          </p>
+
+          <p>
+            <b>User Email: </b>
+            {isLoading ? "Loading..." : user?.email || "N/A"}
+          </p>
+
+          <p>
+            <b>User Address: </b>
+            {isLoading ? "Loading..." : user?.address || "N/A"}
+          </p>
+        </div>
       </div>
     </div>
   );
