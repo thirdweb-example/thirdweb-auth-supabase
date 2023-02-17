@@ -1,14 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { verifyLogin } from "@thirdweb-dev/auth/evm";
-import { createClient } from "@supabase/supabase-js";
-
-// Create a Supabase client using the service role
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.SUPABASE_SERVICE_ROLE as string
-);
+import { createSupabaseServer } from "../../lib/createSupabaseAdmin";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const supabase = createSupabaseServer();
+
   const { payload, access_token } = req.body;
 
   // Get the user from our database using the client side access token
