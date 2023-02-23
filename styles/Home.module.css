@@ -32,7 +32,7 @@
 }
 
 .icon {
-  height: 64px;
+  object-fit: contain;
 }
 
 .explain {
@@ -46,13 +46,6 @@
 .divider {
   width: 50%;
   border-color: grey;
-  opacity: 0.25;
-}
-
-.smallDivider {
-  width: 25%;
-  border-color: grey;
-  margin-top: 64px;
   opacity: 0.25;
 }
 
@@ -88,48 +81,4 @@
 
 .mainButton:hover {
   opacity: 0.8;
-}
-
-.secondaryButton {
-  cursor: pointer;
-  text-align: center;
-  padding: 5px;
-  color: #fff;
-  font-weight: 600;
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  padding: 8px;
-}
-
-.contractBoxGrid {
-  width: 1200px;
-  max-width: 95vw;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1%;
-  margin-top: 28px;
-  flex-wrap: wrap;
-}
-
-/* Between 700px and 900px */
-@media screen and (min-width: 700px) and (max-width: 900px) {
-  .contractBoxGrid {
-    gap: 2%;
-  }
-
-  .contractBox {
-    width: 48%;
-  }
-}
-
-@media screen and (max-width: 699px) {
-  .contractBoxGrid {
-    gap: 2%;
-  }
-
-  .contractBox {
-    width: 98%;
-  }
 }
