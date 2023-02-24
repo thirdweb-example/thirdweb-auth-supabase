@@ -3,6 +3,7 @@ import { useAddress, useMetamask, useAuth } from "@thirdweb-dev/react";
 import { createSupabaseClient } from "../lib/createSupabase";
 import useSupabaseUser from "../lib/useSupabaseUser";
 import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
 const Home: NextPage = () => {
   const thirdwebAuth = useAuth();
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
   const { user, session, refresh, isLoading } = useSupabaseUser();
 
   // Link verified wallet address to our Supabase account
-  async function linkWallet() {
+  const linkWallet = async () => {
     const payload = await thirdwebAuth?.login();
     await fetch("/api/link", {
       method: "POST",
@@ -21,22 +22,27 @@ const Home: NextPage = () => {
       },
       body: JSON.stringify({ payload, access_token: session?.access_token }),
     });
+
     refresh();
-  }
+  };
 
   return (
     <div className={styles.container}>
       <div>
         <div className={styles.iconContainer}>
-          <img
+          <Image
             className={styles.icon}
-            src={"/thirdweb.png"}
+            src="/thirdweb.png"
             alt="thirdweb icon"
+            width={100}
+            height={100}
           />
-          <img
+          <Image
             className={styles.icon}
-            src={"/supabase.png"}
+            src="/supabase.png"
             alt="supabase icon"
+            width={100}
+            height={100}
           />
         </div>
 
